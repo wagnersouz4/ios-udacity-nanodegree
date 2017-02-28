@@ -13,6 +13,8 @@
 		3B7FC0EC1E63EBF9009EA085 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FC0EB1E63EBF9009EA085 /* Assets.xcassets */; };
 		3B7FC0EF1E63EBF9009EA085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FC0ED1E63EBF9009EA085 /* LaunchScreen.storyboard */; };
 		3B7FC0FC1E6520A9009EA085 /* PlaySoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FC0FB1E6520A8009EA085 /* PlaySoundsViewController.swift */; };
+		3B7FC0FE1E65E166009EA085 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FC0FD1E65E166009EA085 /* Alert.swift */; };
+		3B7FC1041E6632A0009EA085 /* UINamedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FC1031E6632A0009EA085 /* UINamedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		3B7FC0EE1E63EBF9009EA085 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B7FC0F01E63EBF9009EA085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B7FC0FB1E6520A8009EA085 /* PlaySoundsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaySoundsViewController.swift; sourceTree = "<group>"; };
+		3B7FC0FD1E65E166009EA085 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		3B7FC1031E6632A0009EA085 /* UINamedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINamedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				3B7FC0EB1E63EBF9009EA085 /* Assets.xcassets */,
 				3B7FC0ED1E63EBF9009EA085 /* LaunchScreen.storyboard */,
 				3B7FC0F01E63EBF9009EA085 /* Info.plist */,
+				3B7FC0FD1E65E166009EA085 /* Alert.swift */,
+				3B7FC1031E6632A0009EA085 /* UINamedButton.swift */,
 			);
 			path = PitchPerfect;
 			sourceTree = "<group>";
@@ -141,6 +147,8 @@
 			files = (
 				3B7FC0E71E63EBF9009EA085 /* RecordSoundsViewController.swift in Sources */,
 				3B7FC0FC1E6520A9009EA085 /* PlaySoundsViewController.swift in Sources */,
+				3B7FC0FE1E65E166009EA085 /* Alert.swift in Sources */,
+				3B7FC1041E6632A0009EA085 /* UINamedButton.swift in Sources */,
 				3B7FC0E51E63EBF9009EA085 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

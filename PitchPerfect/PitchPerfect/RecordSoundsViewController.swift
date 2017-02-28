@@ -19,36 +19,31 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     var audioRecorder: AVAudioRecorder!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         stopRecordingButton.isEnabled = false
     }
-
+    
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            performSegue(withIdentifier: "stopRecording", sender: nil)
+            performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
         } else {
-            print("There was an audio encoding error")
+            Alert.show("error", message: "There was an audio encoding error")
         }
     }
     
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         if let avError = error {
-            print(avError.localizedDescription)
+            Alert.show("Error", message: avError.localizedDescription)
         } else {
-            print("The audio recording failed!")
+            Alert.show("Error", message: "The audio recording failed!")
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "stopRecording" {
-            if let playSoundVC = segue.destination as? PlaySoundsViewController {
-                playSoundVC.audioRecorderUrl = audioRecorder.url
+            if let playSoundVC = segue.destination as? PlaySoundsViewController, let url = sender as? URL {
+                playSoundVC.recordedAudioURL = url
             }
         }
     }
@@ -57,8 +52,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.isEnabled = false
         stopRecordingButton.isEnabled = true
         recordingLabel.text = "Recording in Progress"
-        
-        // Starting the audio recording
+
         // Obtaining the app directory as String
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
@@ -85,7 +79,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
                 }
             }
         } catch let error as NSError {
-            print(error.domain.description)
+            Alert.show("Error", message: error.domain.description)
         }
     }
 
@@ -99,7 +93,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             do {
                 try audioSession.setActive(false)
             } catch let error as NSError {
-                print(error.domain)
+                Alert.show("Error", message: error.domain.description)
             }
         }
     }

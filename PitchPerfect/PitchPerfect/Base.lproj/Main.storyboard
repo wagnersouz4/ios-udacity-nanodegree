@@ -91,18 +91,24 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Qtv-vr-G7J">
                                                 <rect key="frame" x="0.0" y="0.0" width="343" height="173"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SyC-t4-toj" userLabel="RabbitButton">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJi-ud-kq3" userLabel="SnailButton" customClass="UINamedButton" customModule="PitchPerfect" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="173"/>
-                                                        <state key="normal" image="FastEffect"/>
-                                                        <connections>
-                                                            <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="wWm-Ss-JVF"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJi-ud-kq3" userLabel="SnailButton">
-                                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="173"/>
                                                         <state key="normal" image="SlowEffect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="snail"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="ohw-Ce-VXL"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SyC-t4-toj" userLabel="RabbitButton" customClass="UINamedButton" customModule="PitchPerfect" customModuleProvider="target">
+                                                        <rect key="frame" x="171.5" y="0.0" width="171.5" height="173"/>
+                                                        <state key="normal" image="FastEffect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="rabbit"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="wWm-Ss-JVF"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -110,16 +116,22 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Fhv-aY-tAL">
                                                 <rect key="frame" x="0.0" y="173" width="343" height="173"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTH-sc-YbX" userLabel="ChipmunkButton">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTH-sc-YbX" userLabel="ChipmunkButton" customClass="UINamedButton" customModule="PitchPerfect" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="173"/>
                                                         <state key="normal" image="HighPitchEffect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="chipmunk"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="dWC-kB-JYK"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-pj-df8" userLabel="DarthVaderButton">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-pj-df8" userLabel="DarthVaderButton" customClass="UINamedButton" customModule="PitchPerfect" customModuleProvider="target">
                                                         <rect key="frame" x="171.5" y="0.0" width="171.5" height="173"/>
                                                         <state key="normal" image="LowPitchEffect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="darthVader"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="jOq-00-snm"/>
                                                         </connections>
@@ -129,16 +141,22 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="G1J-il-EgL">
                                                 <rect key="frame" x="0.0" y="346" width="343" height="173"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6F-Bm-VBG" userLabel="EchoButton">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6F-Bm-VBG" userLabel="EchoButton" customClass="UINamedButton" customModule="PitchPerfect" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="171.5" height="173"/>
                                                         <state key="normal" image="EchoEffect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="echo"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="L1S-7D-eCm"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ytu-F4-Pwg" userLabel="ReverbButton">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ytu-F4-Pwg" userLabel="ReverbButton" customClass="UINamedButton" customModule="PitchPerfect" customModuleProvider="target">
                                                         <rect key="frame" x="171.5" y="0.0" width="171.5" height="173"/>
                                                         <state key="normal" image="ReverbEffect"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="name" value="reverb"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="playSoundForButton:" destination="qQW-cd-Mvi" eventType="touchUpInside" id="51q-ZR-bit"/>
                                                         </connections>
