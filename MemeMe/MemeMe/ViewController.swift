@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     // UIImageView containing the selected image
     @IBOutlet weak var selectedImage: UIImageView!
 
@@ -33,6 +33,15 @@ class ViewController: UIViewController {
     private func presentUIImagePickerWithSourceType(_ sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
         present(imagePicker, animated: true)
+    }
+
+    // Delegate method to set the image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            selectedImage.image = image
+        }
+        dismiss(animated: true)
     }
 }
