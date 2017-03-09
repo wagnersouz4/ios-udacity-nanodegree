@@ -15,6 +15,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
     @IBOutlet weak var selectFromAlbumButton: UIBarButtonItem!
 
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Enable the select from camera feature only if there is a camera available.
