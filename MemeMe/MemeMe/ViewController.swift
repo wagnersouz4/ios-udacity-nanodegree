@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ViewController: UIViewController, UINavigationControllerDelegate,
+                    UIImagePickerControllerDelegate, UITextFieldDelegate {
     // UIImageView containing the selected image
     @IBOutlet weak var selectedImage: UIImageView!
 
@@ -37,8 +38,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = .center
+        topTextField.delegate = self
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = .center
+        bottomTextField.delegate = self
     }
 
     @IBAction func selectImageFromCamera() {
@@ -63,5 +66,17 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             selectedImage.image = image
         }
         dismiss(animated: true)
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text == "TOP" || textField.text == "BOTTOM" {
+            textField.text = ""
+        }
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // dimissing the keyboard
+        textField.resignFirstResponder()
+        return true
     }
 }
