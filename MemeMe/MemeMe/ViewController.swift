@@ -122,4 +122,23 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
+
+    private func save() {
+        if let topText = topTextField.text, let bottomText = bottomTextField.text,
+            let originalImage = selectedImage.image, let memedImage = generateMemedImage() {
+            let _ = Meme(topText: topText, bottomText: bottomText,
+                         oiriginalImage: originalImage, memedImage: memedImage)
+        }
+    }
+
+    private func generateMemedImage() -> UIImage? {
+        // Rendering a View to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        view.snapshotView(afterScreenUpdates: true)//(in: self.view.frame, afterScreenUpdates: true)
+        if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return memedImage
+        }
+        return nil
+    }
 }
