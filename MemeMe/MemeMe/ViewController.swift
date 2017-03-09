@@ -10,12 +10,14 @@ import UIKit
 
 class ViewController: UIViewController, UINavigationControllerDelegate,
                     UIImagePickerControllerDelegate, UITextFieldDelegate {
-    // UIImageView containing the selected image
+
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
     @IBOutlet weak var selectFromAlbumButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
+    @IBOutlet weak var topToolBar: UIToolbar!
+    @IBOutlet weak var bottomToolBar: UIToolbar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,11 +136,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
     private func generateMemedImage() -> UIImage? {
         // Rendering a View to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
-        view.snapshotView(afterScreenUpdates: true)//(in: self.view.frame, afterScreenUpdates: true)
+
+        // Before take the snapshot both top and bottom toolbar should be hidden
+        setToolBarsIsHidden(to: true)
+        view.snapshotView(afterScreenUpdates: true)
+        setToolBarsIsHidden(to: false)
         if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
             UIGraphicsEndImageContext()
             return memedImage
         }
         return nil
+    }
+
+    private func setToolBarsIsHidden(to isHidden: Bool) {
+        topToolBar.isHidden = isHidden
+        bottomToolBar.isHidden = isHidden
     }
 }
