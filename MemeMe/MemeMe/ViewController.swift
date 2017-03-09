@@ -12,36 +12,23 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
                     UIImagePickerControllerDelegate, UITextFieldDelegate {
     // UIImageView containing the selected image
     @IBOutlet weak var selectedImage: UIImageView!
-
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
     @IBOutlet weak var selectFromAlbumButton: UIBarButtonItem!
-
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
+        initialTextFieldConfiguration(for: topTextField)
+        initialTextFieldConfiguration(for: bottomTextField)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Enable the select from camera feature only if there is a camera available.
         selectFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-
-        let memeTextAttributes: [String: Any] = [
-            NSStrokeColorAttributeName: UIColor.black,
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: -1]
-
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = .center
-        topTextField.delegate = self
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = .center
-        bottomTextField.delegate = self
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
         subscribeToKeyboardNotifications()
     }
 
@@ -58,8 +45,21 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
         presentUIImagePickerWithSourceType(.savedPhotosAlbum)
     }
 
+    private func initialTextFieldConfiguration(for textField: UITextField) {
+        let memeTextAttributes: [String: Any] = [
+            NSStrokeColorAttributeName: UIColor.black,
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: -1
+        ]
+
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.delegate = self
+        textField.textAlignment = .center
+    }
+
     // Preseting a UIImagePickerController with a specific sourceType
-    private func presentUIImagePickerWithSourceType(_ sourceType: UIImagePickerControllerSourceType) {
+    func presentUIImagePickerWithSourceType(_ sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
@@ -94,7 +94,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
             }
         }
     }
-    
+
     // Restoring the frame y position when the keyboard will hide
     func keyboardWillHide() {
             view.frame.origin.y = 0
@@ -109,16 +109,16 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
         }
         return nil
     }
-    
+
     // Subscribing to the keyboard's willShow and willHide notification
-    func subscribeToKeyboardNotifications() {
+    private func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)),
                                                name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
                                                name: .UIKeyboardWillHide, object: nil)
     }
 
-    func unsubscribeToKeyboardNotifications() {
+    private func unsubscribeToKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
