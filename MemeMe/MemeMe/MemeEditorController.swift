@@ -14,6 +14,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
     @IBOutlet weak var selectFromAlbumButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topToolBar: UIToolbar!
@@ -31,6 +32,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate,
         selectFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
+        shareButton.isEnabled = selectedImage.image != nil
         subscribeToKeyboardNotifications()
     }
 

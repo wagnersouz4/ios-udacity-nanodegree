@@ -86,9 +86,10 @@
                     <connections>
                         <outlet property="bottomTextField" destination="CQO-Bk-cMt" id="fko-W5-aMy"/>
                         <outlet property="bottomToolBar" destination="1Or-Je-jeB" id="qeg-d8-0Xn"/>
-                        <outlet property="selectFromAlbumButton" destination="SRE-8k-wV6" id="RV5-f7-h5I"/>
+                        <outlet property="selectFromAlbumButton" destination="SRE-8k-wV6" id="GHe-ML-CNi"/>
                         <outlet property="selectFromCameraButton" destination="tWX-fq-5B8" id="Zz3-9c-Zo5"/>
                         <outlet property="selectedImage" destination="vBh-9i-mSr" id="fDN-DP-G4w"/>
+                        <outlet property="shareButton" destination="YGu-rg-ME5" id="fqF-Fb-los"/>
                         <outlet property="topTextField" destination="mbj-G2-mDy" id="Ac6-nw-shA"/>
                         <outlet property="topToolBar" destination="TQg-Y3-G3s" id="1VK-Qk-zq8"/>
                     </connections>
