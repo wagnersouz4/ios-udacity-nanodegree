@@ -17,11 +17,28 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
 
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        topTextField.text = "TOP"
+        bottomTextField.text = "BOTTOM"
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Enable the select from camera feature only if there is a camera available.
         selectFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+
+        let memeTextAttributes: [String: Any] = [
+            NSStrokeColorAttributeName: UIColor.black,
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: -1]
+
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = .center
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = .center
     }
 
     @IBAction func selectImageFromCamera() {
