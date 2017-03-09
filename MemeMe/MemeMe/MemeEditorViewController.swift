@@ -9,7 +9,7 @@
 import UIKit
 
 class MemeEditorViewController: UIViewController, UINavigationControllerDelegate,
-                    UIImagePickerControllerDelegate, UITextFieldDelegate {
+UIImagePickerControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
@@ -47,6 +47,22 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
 
     @IBAction func selectImageFromAlbum() {
         presentUIImagePickerWithSourceType(.savedPhotosAlbum)
+    }
+
+    @IBAction func shareMeme() {
+        if let generatedMeme = generateMemedImage() {
+            let itemsToShare = [generatedMeme]
+            let activityViewController = UIActivityViewController(activityItems: itemsToShare,
+                                                                  applicationActivities: nil)
+            // [weak self] is needed to avoid a possible strong reference cycle
+            activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
+                if success {
+                    self?.save(generatedMeme)
+                    self?.dismiss(animated: true)
+                }
+            }
+            self.present(activityViewController, animated: true)
+        }
     }
 
     private func initialTextFieldConfiguration(for textField: UITextField) {
@@ -101,7 +117,7 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
 
     // Restoring the frame y position when the keyboard will hide
     func keyboardWillHide() {
-            view.frame.origin.y = 0
+        view.frame.origin.y = 0
     }
 
     // Using the userInfo notification's property to obtain the keyboard height
@@ -127,11 +143,11 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 
-    private func save() {
+    private func save(_ generatedMeme: UIImage) {
         if let topText = topTextField.text, let bottomText = bottomTextField.text,
-            let originalImage = selectedImage.image, let memedImage = generateMemedImage() {
+            let originalImage = selectedImage.image {
             let _ = Meme(topText: topText, bottomText: bottomText,
-                         oiriginalImage: originalImage, memedImage: memedImage)
+                         oiriginalImage: originalImage, memedImage: generatedMeme)
         }
     }
 
@@ -141,11 +157,12 @@ class MemeEditorViewController: UIViewController, UINavigationControllerDelegate
 
         // Before take the snapshot both top and bottom toolbar should be hidden
         setToolBarsIsHidden(to: true)
-        view.snapshotView(afterScreenUpdates: true)
-        setToolBarsIsHidden(to: false)
-        if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
-            UIGraphicsEndImageContext()
-            return memedImage
+        if view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true) {
+            setToolBarsIsHidden(to: false)
+            if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
+                UIGraphicsEndImageContext()
+                return memedImage
+            }
         }
         return nil
     }
