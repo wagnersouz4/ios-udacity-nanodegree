@@ -56,13 +56,13 @@
 		3B4E82041E70EAF2006F9E6F /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				3B4E821F1E71E35D006F9E6F /* Meme.swift */,
 				3B4E82051E70EAF2006F9E6F /* AppDelegate.swift */,
 				3B4E82071E70EAF2006F9E6F /* MemeEditorViewController.swift */,
 				3B4E82091E70EAF2006F9E6F /* Main.storyboard */,
 				3B4E820C1E70EAF2006F9E6F /* Assets.xcassets */,
 				3B4E820E1E70EAF2006F9E6F /* LaunchScreen.storyboard */,
 				3B4E82111E70EAF2006F9E6F /* Info.plist */,
-				3B4E821F1E71E35D006F9E6F /* Meme.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";

@@ -42,11 +42,11 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
     }
 
     @IBAction func selectImageFromCamera() {
-        presentUIImagePickerWithSourceType(.camera)
+        presentUIImagePicker(usingSourceType: .camera)
     }
 
     @IBAction func selectImageFromAlbum() {
-        presentUIImagePickerWithSourceType(.savedPhotosAlbum)
+        presentUIImagePicker(usingSourceType: .savedPhotosAlbum)
     }
 
     @IBAction func shareMeme() {
@@ -79,7 +79,7 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
     }
 
     // Preseting a UIImagePickerController with a specific sourceType
-    func presentUIImagePickerWithSourceType(_ sourceType: UIImagePickerControllerSourceType) {
+    func presentUIImagePicker(usingSourceType sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
