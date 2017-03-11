@@ -1,5 +1,5 @@
 //
-//  CollectionViewController.swift
+//  MemeMeCollectionViewController.swift
 //  MemeMe
 //
 //  Created by Wagner Souza on 11/03/17.
