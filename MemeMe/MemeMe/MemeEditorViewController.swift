@@ -146,8 +146,15 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
     private func save(_ generatedMeme: UIImage) {
         if let topText = topTextField.text, let bottomText = bottomTextField.text,
             let originalImage = selectedImage.image {
-            let _ = Meme(topText: topText, bottomText: bottomText,
+
+            // Creating a new meme to be stored
+            let meme = Meme(topText: topText, bottomText: bottomText,
                          oiriginalImage: originalImage, memedImage: generatedMeme)
+            let object = UIApplication.shared.delegate
+            if let appDelegate = object as? AppDelegate {
+                // Appeding the meme in the AppDelegate's memes property
+                appDelegate.memes.append(meme)
+            }
         }
     }
 
