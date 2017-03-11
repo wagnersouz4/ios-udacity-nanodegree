@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewController: UIViewController {
+class CollectionViewController: UICollectionViewController {
     private var memes = [Meme]()
 
     override func viewWillAppear(_ animated: Bool) {

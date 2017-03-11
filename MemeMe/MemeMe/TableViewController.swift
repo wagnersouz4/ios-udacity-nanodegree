@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UIViewController {
+class TableViewController: UITableViewController {
     private var memes = [Meme]()
 
     override func viewWillAppear(_ animated: Bool) {
