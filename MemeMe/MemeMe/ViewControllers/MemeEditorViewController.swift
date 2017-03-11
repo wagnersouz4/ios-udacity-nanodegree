@@ -41,6 +41,10 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
         unsubscribeToKeyboardNotifications()
     }
 
+    @IBAction func cancelMemeEdition() {
+        self.dismiss(animated: true)
+    }
+
     @IBAction func selectImageFromCamera() {
         presentUIImagePicker(usingSourceType: .camera)
     }

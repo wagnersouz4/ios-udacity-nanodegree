@@ -98,7 +98,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LOA-97-pYW"/>
-                                    <barButtonItem title="Cancel" id="SJz-3R-KDc"/>
+                                    <barButtonItem title="Cancel" id="SJz-3R-KDc">
+                                        <connections>
+                                            <action selector="cancelMemeEdition" destination="BYZ-38-t0r" id="ffZ-Kj-cEA"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
