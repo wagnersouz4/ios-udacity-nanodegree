@@ -43,6 +43,9 @@ extension MemesTableViewController {
 // MARK: Table view and delegate
 extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // View Object
+        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as? MemeDetailViewController {
+            memeDetailVC.memeDetailImage.image = memes[indexPath.row].memedImage
+            self.navigationController?.pushViewController(memeDetailVC, animated: true)
+        }
     }
 }

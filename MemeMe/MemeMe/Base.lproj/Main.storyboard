@@ -116,5 +116,80 @@
             </objects>
             <point key="canvasLocation" x="-1058" y="-262"/>
         </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="iaR-oK-8z5">
+            <objects>
+                <collectionViewController id="voc-dl-a8v" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="laf-mx-w8p">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PYN-1g-82y">
+                            <size key="itemSize" width="112" height="100"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionCell" id="Jps-Ne-ISQ" customClass="MemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="112" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="112" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OXw-JN-6QG">
+                                            <rect key="frame" x="0.0" y="0.0" width="112" height="100"/>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="OXw-JN-6QG" secondAttribute="bottom" id="7nF-Xb-z0E"/>
+                                    <constraint firstAttribute="trailing" secondItem="OXw-JN-6QG" secondAttribute="trailing" id="Hm3-BP-Wfy"/>
+                                    <constraint firstItem="OXw-JN-6QG" firstAttribute="leading" secondItem="Jps-Ne-ISQ" secondAttribute="leading" id="OSQ-FX-b77"/>
+                                    <constraint firstItem="OXw-JN-6QG" firstAttribute="top" secondItem="Jps-Ne-ISQ" secondAttribute="top" id="S8F-1k-m34"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="memeImage" destination="OXw-JN-6QG" id="VUv-sS-TtH"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="voc-dl-a8v" id="pvw-s4-R3y"/>
+                            <outlet property="delegate" destination="voc-dl-a8v" id="gqu-9Y-EiF"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VEM-AU-HCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1113.75" y="512.32394366197184"/>
+        </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="b2c-Zt-YFP">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="dvG-T3-Dxx" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Vrk-d1-vzh"/>
+                        <viewControllerLayoutGuide type="bottom" id="qzb-TA-TRE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Jo-7T-N1z">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vch-rb-5gT">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="memeDetailImage" destination="vch-rb-5gT" id="fsM-eE-Iox"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0sG-LK-9Pj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-346.875" y="509.15492957746477"/>
+        </scene>
     </scenes>
 </document>
