@@ -33,9 +33,13 @@ extension MemesTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableCell", for: indexPath)
+            as? MemeTableViewCell else { fatalError("Dequeuing has failed!") }
 
-        // Set cell's attributes -> use a configure method in the cells as cast to have it
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableCell", for: indexPath)
+        let meme = memes[indexPath.row]
+        cell.bottomLabel.text = meme.bottomText
+        cell.topLabel.text = meme.topText
+        cell.originalImage.image = meme.oiriginalImage
         return cell
     }
 }
@@ -43,7 +47,8 @@ extension MemesTableViewController {
 // MARK: Table view and delegate
 extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as? MemeDetailViewController {
+        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
+            as? MemeDetailViewController {
             memeDetailVC.memeDetailImage.image = memes[indexPath.row].memedImage
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }

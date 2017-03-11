@@ -33,11 +33,10 @@ extension MemesCollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionCell",
-                                                      for: indexPath) as? MemeCollectionViewCell
-        // Todo -> To refactor - remove forced unwraped
-        cell!.memeImage.image = memes[indexPath.row].memedImage
-        return cell!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionCell", for: indexPath)
+            as? MemeCollectionViewCell else { fatalError("Dequeuing has failed!") }
+        cell.memeImage.image = memes[indexPath.row].memedImage
+        return cell
     }
 }
 
@@ -45,7 +44,8 @@ extension MemesCollectionViewController {
 extension MemesCollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController") as? MemeDetailViewController {
+        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
+            as? MemeDetailViewController {
             memeDetailVC.memeDetailImage.image = memes[indexPath.row].memedImage
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
