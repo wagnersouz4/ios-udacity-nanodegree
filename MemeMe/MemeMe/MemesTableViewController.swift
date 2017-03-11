@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  MemesTableViewController.swift
 //  MemeMe
 //
 //  Created by Wagner Souza on 11/03/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class MemesTableViewController: UITableViewController {
     private var memes = [Meme]()
 
     override func viewWillAppear(_ animated: Bool) {

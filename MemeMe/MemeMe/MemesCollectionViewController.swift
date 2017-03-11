@@ -1,5 +1,5 @@
 //
-//  MemeMeCollectionViewController.swift
+//  MemesCollectionViewController.swift
 //  MemeMe
 //
 //  Created by Wagner Souza on 11/03/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewController: UICollectionViewController {
+class MemesCollectionViewController: UICollectionViewController {
     private var memes = [Meme]()
 
     override func viewWillAppear(_ animated: Bool) {
