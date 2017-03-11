@@ -2,7 +2,7 @@
 //  Meme.swift
 //  MemeMe
 //
-//  Created by Pan on 9/03/17.
+//  Created by Wagner Souza on 9/03/17.
 //  Copyright © 2017 Wagner Souza. All rights reserved.
 //
 
