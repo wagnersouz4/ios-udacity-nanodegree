@@ -1,3 +1,4 @@
+use_frameworks!
 platform :ios, '10.2'
 target 'MemeMe' do
   pod 'RealmSwift', '~> 2.4.3'
