@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol MemeEditorViewControllerDelegate {
-    
-}
-
 class MemeEditorViewController: UIViewController {
 
     @IBOutlet weak var selectedImage: UIImageView!
@@ -184,16 +180,21 @@ private extension MemeEditorViewController {
     }
 
     func generateMemedImage() -> UIImage? {
-        // Rendering a View to an image
-        UIGraphicsBeginImageContext(self.view.frame.size)
-
-        // Before take the snapshot both top and bottom toolbar should be hidden
-        setToolBarsIsHidden(to: true)
+        // Creating image context using the actual view size
+        UIGraphicsBeginImageContextWithOptions(self.view.frame.size, false, 0)
+        // Trying to take a snapshot of the view hierarchy into the current context
         if view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true) {
-            setToolBarsIsHidden(to: false)
-            if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
+            if let image = UIGraphicsGetImageFromCurrentImageContext() {
                 UIGraphicsEndImageContext()
-                return memedImage
+                // Rectangle containing the image with the top and bottom text
+                let rect = selectedImage.frame
+                let scale = image.scale
+                let scaledRect = CGRect(x: rect.origin.x * scale, y: rect.origin.y * scale,
+                                        width: rect.size.width * scale, height: rect.size.height * scale)
+                // cropping the image to only use the UIViewImage's image, not the entire screen
+                if let croppedImage = image.cgImage?.cropping(to: scaledRect) {
+                    return UIImage(cgImage: croppedImage, scale: scale, orientation: .up)
+                }
             }
         }
         return nil

@@ -163,7 +163,7 @@
         <scene sceneID="iaR-oK-8z5">
             <objects>
                 <collectionViewController id="voc-dl-a8v" customClass="MemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="laf-mx-w8p">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="laf-mx-w8p">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,15 +182,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OXw-JN-6QG">
-                                            <rect key="frame" x="0.0" y="0.0" width="112" height="100"/>
+                                            <rect key="frame" x="6" y="0.0" width="100" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="7K6-rd-Qzw"/>
+                                                <constraint firstAttribute="width" constant="100" id="wxa-b5-P0m"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="OXw-JN-6QG" secondAttribute="bottom" id="7nF-Xb-z0E"/>
-                                    <constraint firstAttribute="trailing" secondItem="OXw-JN-6QG" secondAttribute="trailing" id="Hm3-BP-Wfy"/>
-                                    <constraint firstItem="OXw-JN-6QG" firstAttribute="leading" secondItem="Jps-Ne-ISQ" secondAttribute="leading" id="OSQ-FX-b77"/>
-                                    <constraint firstItem="OXw-JN-6QG" firstAttribute="top" secondItem="Jps-Ne-ISQ" secondAttribute="top" id="S8F-1k-m34"/>
+                                    <constraint firstItem="OXw-JN-6QG" firstAttribute="leading" secondItem="Jps-Ne-ISQ" secondAttribute="leading" constant="6" id="738-HA-3kE"/>
+                                    <constraint firstAttribute="trailing" secondItem="OXw-JN-6QG" secondAttribute="trailing" constant="6" id="Fhy-aK-PdI"/>
+                                    <constraint firstItem="OXw-JN-6QG" firstAttribute="top" secondItem="Jps-Ne-ISQ" secondAttribute="top" id="Gma-zO-Zoy"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="memedImage" destination="OXw-JN-6QG" id="4NY-Qx-uGC"/>
@@ -212,7 +215,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEM-AU-HCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-731" y="442"/>
+            <point key="canvasLocation" x="-731.25" y="441.54929577464787"/>
         </scene>
         <!--MemeMe-->
         <scene sceneID="Cmg-Un-4eg">
@@ -223,7 +226,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" id="RWF-ER-2iA" customClass="MemeTableViewCell" customModule="MemeMe" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MemeTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" id="RWF-ER-2iA" customClass="MemeTableViewCell" customModule="MemeMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RWF-ER-2iA" id="iHH-iw-gvb">
@@ -364,6 +367,6 @@
         <image name="NavigationNext" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ncy-I8-0zZ"/>
+        <segue reference="4by-an-Ell"/>
     </inferredMetricsTieBreakers>
 </document>
