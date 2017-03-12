@@ -18,7 +18,6 @@
 		3B4E820B1E70EAF2006F9E6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4E82091E70EAF2006F9E6F /* Main.storyboard */; };
 		3B4E820D1E70EAF2006F9E6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B4E820C1E70EAF2006F9E6F /* Assets.xcassets */; };
 		3B4E82101E70EAF2006F9E6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B4E820E1E70EAF2006F9E6F /* LaunchScreen.storyboard */; };
-		3BE2103C1E7513C7004E3064 /* MemeModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2103A1E7513C7004E3064 /* MemeModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +34,6 @@
 		3B4E820C1E70EAF2006F9E6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B4E820F1E70EAF2006F9E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B4E82111E70EAF2006F9E6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3BE2103B1E7513C7004E3064 /* MemeModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MemeModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +83,6 @@
 				3B4E820C1E70EAF2006F9E6F /* Assets.xcassets */,
 				3B4E820E1E70EAF2006F9E6F /* LaunchScreen.storyboard */,
 				3B4E82111E70EAF2006F9E6F /* Info.plist */,
-				3BE2103A1E7513C7004E3064 /* MemeModel.xcdatamodeld */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -205,7 +202,6 @@
 				3B4E82061E70EAF2006F9E6F /* AppDelegate.swift in Sources */,
 				3B16A1091E73EA81007C57A3 /* Meme.swift in Sources */,
 				3B16A1121E73F925007C57A3 /* MemeDetailViewController.swift in Sources */,
-				3BE2103C1E7513C7004E3064 /* MemeModel.xcdatamodeld in Sources */,
 				3B16A1051E73EA70007C57A3 /* MemeEditorViewController.swift in Sources */,
 				3B16A1071E73EA70007C57A3 /* MemesTableViewController.swift in Sources */,
 			);
@@ -374,19 +370,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3BE2103A1E7513C7004E3064 /* MemeModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3BE2103B1E7513C7004E3064 /* MemeModel.xcdatamodel */,
-			);
-			currentVersion = 3BE2103B1E7513C7004E3064 /* MemeModel.xcdatamodel */;
-			path = MemeModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 3B4E81FA1E70EAF2006F9E6F /* Project object */;
 }
