@@ -38,7 +38,7 @@ extension MemesCollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionCell", for: indexPath)
             as? MemeCollectionViewCell else { fatalError("Dequeuing has failed!") }
 
-        cell.memeImage = UIImageView(image: memes[indexPath.row].memedImage)
+        cell.memedImage.image = memes[indexPath.row].memedImage
         return cell
     }
 }
