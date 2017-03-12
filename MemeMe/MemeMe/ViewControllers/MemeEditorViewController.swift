@@ -165,18 +165,38 @@ extension MemeEditorViewController {
 
 // MARK: Generate and save a Meme
 private extension MemeEditorViewController {
-    func save(_ generatedMeme: UIImage) {
+    func save(_ generatedMemedImage: UIImage) {
         if let topText = topTextField.text, let bottomText = bottomTextField.text,
             let originalImage = selectedImage.image {
 
             // Creating a new meme to be stored
             let meme = Meme(topText: topText, bottomText: bottomText,
-                            oiriginalImage: originalImage, memedImage: generatedMeme)
+                            oiriginalImage: originalImage, memedImage: generatedMemedImage)
+
+            if let path = saveImageToFile(generatedMemedImage) {
+                print(path)
+            }
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                 // Appeding the meme in the AppDelegate's memes property
                 appDelegate.memes.append(meme)
             }
         }
+    }
+
+    func saveImageToFile(_ image: UIImage) -> String? {
+        // creating a unique name to the new image
+        let newImageName = UUID().uuidString + ".jpg"
+        if let data = UIImageJPEGRepresentation(image, 0.3) {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let filename = documentDirectory.appendingPathComponent(newImageName)
+            do {
+                try data.write(to: filename)
+                return filename.absoluteString
+            } catch {
+                print("Error while saving file: \(error.localizedDescription)")
+            }
+        }
+        return nil
     }
 
     func generateMemedImage() -> UIImage? {
