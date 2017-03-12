@@ -23,6 +23,7 @@ extension MemesTableViewController {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
            memes = appDelegate.memes
         }
+        tableView.reloadData()
     }
 }
 
@@ -49,7 +50,7 @@ extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as? MemeDetailViewController {
-            memeDetailVC.memeDetailImage.image = memes[indexPath.row].memedImage
+            memeDetailVC.memedImage = memes[indexPath.row].memedImage
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
     }

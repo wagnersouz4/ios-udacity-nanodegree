@@ -302,6 +302,11 @@
                                         <constraint firstItem="kVX-p2-y0H" firstAttribute="leading" secondItem="pqt-hy-Yv8" secondAttribute="trailing" constant="8" id="uoU-Vi-NNW"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bottomLabel" destination="pqt-hy-Yv8" id="Jvu-CM-hX6"/>
+                                    <outlet property="originalImage" destination="F8C-gh-Gcq" id="jts-Ci-zU9"/>
+                                    <outlet property="topLabel" destination="Hr2-j8-8Pq" id="zoL-nx-u29"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -334,12 +339,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vch-rb-5gT">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vch-rb-5gT">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vch-rb-5gT" firstAttribute="top" secondItem="Vrk-d1-vzh" secondAttribute="bottom" id="OML-YB-aaJ"/>
+                            <constraint firstAttribute="trailing" secondItem="vch-rb-5gT" secondAttribute="trailing" id="Www-Ib-Gn3"/>
+                            <constraint firstItem="vch-rb-5gT" firstAttribute="leading" secondItem="4Jo-7T-N1z" secondAttribute="leading" id="p8u-cB-95g"/>
+                            <constraint firstItem="qzb-TA-TRE" firstAttribute="top" secondItem="vch-rb-5gT" secondAttribute="bottom" id="sHb-3n-45a"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="memeDetailImage" destination="vch-rb-5gT" id="fsM-eE-Iox"/>

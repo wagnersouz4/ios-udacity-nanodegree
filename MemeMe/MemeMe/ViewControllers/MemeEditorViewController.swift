@@ -8,8 +8,11 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UINavigationControllerDelegate,
-UIImagePickerControllerDelegate, UITextFieldDelegate {
+protocol MemeEditorViewControllerDelegate {
+    
+}
+
+class MemeEditorViewController: UIViewController {
 
     @IBOutlet weak var selectedImage: UIImageView!
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
@@ -22,8 +25,8 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialTextFieldConfiguration(for: topTextField)
-        initialTextFieldConfiguration(for: bottomTextField)
+        defaultTextFieldConfiguration(for: topTextField)
+        defaultTextFieldConfiguration(for: bottomTextField)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +43,25 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
         super.viewWillDisappear(animated)
         unsubscribeToKeyboardNotifications()
     }
+}
 
+private extension MemeEditorViewController {
+    func defaultTextFieldConfiguration(for textField: UITextField) {
+        // Default memeTextAttributes
+        let memeTextAttributes: [String: Any] = [
+            NSStrokeColorAttributeName: UIColor.black,
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: -1
+        ]
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.delegate = self
+        textField.textAlignment = .center
+    }
+}
+
+// MARK: IBActions
+private extension MemeEditorViewController {
     @IBAction func cancelMemeEdition() {
         self.dismiss(animated: true)
     }
@@ -58,7 +79,7 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
             let itemsToShare = [generatedMeme]
             let activityViewController = UIActivityViewController(activityItems: itemsToShare,
                                                                   applicationActivities: nil)
-            // [weak self] is needed to avoid a possible strong reference cycle
+            // [weak self] is needed to avoid a strong reference cycle
             activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
                 if success {
                     self?.save(generatedMeme)
@@ -68,19 +89,10 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
             self.present(activityViewController, animated: true)
         }
     }
+}
 
-    private func initialTextFieldConfiguration(for textField: UITextField) {
-        let memeTextAttributes: [String: Any] = [
-            NSStrokeColorAttributeName: UIColor.black,
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: -1
-        ]
-
-        textField.defaultTextAttributes = memeTextAttributes
-        textField.delegate = self
-        textField.textAlignment = .center
-    }
+// MARK: UIImagePicker and UINavigation's delegate
+extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // Preseting a UIImagePickerController with a specific sourceType
     func presentUIImagePicker(usingSourceType sourceType: UIImagePickerControllerSourceType) {
@@ -97,7 +109,10 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
         }
         dismiss(animated: true)
     }
+}
 
+// MARK: UITextField's delegate
+extension MemeEditorViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
@@ -109,7 +124,10 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
 
+// MARK: Keyboard and view management
+extension MemeEditorViewController {
     // Moving the view when the keyboards covers the text field
     func keyboardWillShow(_ notification: Notification) {
         if bottomTextField.isEditing {
@@ -135,34 +153,37 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
     }
 
     // Subscribing to the keyboard's willShow and willHide notification
-    private func subscribeToKeyboardNotifications() {
+    func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)),
                                                name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
                                                name: .UIKeyboardWillHide, object: nil)
     }
 
-    private func unsubscribeToKeyboardNotifications() {
+    func unsubscribeToKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
 
-    private func save(_ generatedMeme: UIImage) {
+}
+
+// MARK: Generate and save a Meme
+private extension MemeEditorViewController {
+    func save(_ generatedMeme: UIImage) {
         if let topText = topTextField.text, let bottomText = bottomTextField.text,
             let originalImage = selectedImage.image {
 
             // Creating a new meme to be stored
             let meme = Meme(topText: topText, bottomText: bottomText,
-                         oiriginalImage: originalImage, memedImage: generatedMeme)
-            let object = UIApplication.shared.delegate
-            if let appDelegate = object as? AppDelegate {
+                            oiriginalImage: originalImage, memedImage: generatedMeme)
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                 // Appeding the meme in the AppDelegate's memes property
                 appDelegate.memes.append(meme)
             }
         }
     }
 
-    private func generateMemedImage() -> UIImage? {
+    func generateMemedImage() -> UIImage? {
         // Rendering a View to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
 
@@ -178,7 +199,7 @@ UIImagePickerControllerDelegate, UITextFieldDelegate {
         return nil
     }
 
-    private func setToolBarsIsHidden(to isHidden: Bool) {
+    func setToolBarsIsHidden(to isHidden: Bool) {
         topToolBar.isHidden = isHidden
         bottomToolBar.isHidden = isHidden
     }

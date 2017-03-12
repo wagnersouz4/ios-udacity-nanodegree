@@ -22,6 +22,7 @@ extension MemesCollectionViewController {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             memes = appDelegate.memes
         }
+        collectionView?.reloadData()
     }
 }
 
@@ -33,9 +34,11 @@ extension MemesCollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionCell", for: indexPath)
             as? MemeCollectionViewCell else { fatalError("Dequeuing has failed!") }
-        cell.memeImage.image = memes[indexPath.row].memedImage
+
+        cell.memeImage = UIImageView(image: memes[indexPath.row].memedImage)
         return cell
     }
 }
@@ -46,7 +49,7 @@ extension MemesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as? MemeDetailViewController {
-            memeDetailVC.memeDetailImage.image = memes[indexPath.row].memedImage
+            memeDetailVC.memedImage = memes[indexPath.row].memedImage
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
     }
