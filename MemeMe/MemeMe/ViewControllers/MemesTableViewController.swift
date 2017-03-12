@@ -10,6 +10,7 @@ import UIKit
 
 class MemesTableViewController: UITableViewController {
     var memes = [Meme]()
+    var chachedImages = [String: UIImage?]()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,11 +37,18 @@ extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableCell", for: indexPath)
             as? MemeTableViewCell else { fatalError("Dequeuing has failed!") }
-
         let meme = memes[indexPath.row]
         cell.bottomLabel.text = meme.bottomText
         cell.topLabel.text = meme.topText
-        cell.originalImage.image = meme.oiriginalImage
+        // trying the cache first
+        if let image = chachedImages[meme.originalImageName] {
+            cell.originalImage.image = image
+        } else {
+            let image = meme.originalImageAsUIImage
+            cell.originalImage.image = image
+            chachedImages.updateValue(image, forKey: meme.originalImageName)
+        }
+
         return cell
     }
 }
@@ -50,7 +58,7 @@ extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as? MemeDetailViewController {
-            memeDetailVC.memedImage = memes[indexPath.row].memedImage
+            memeDetailVC.memedImage = memes[indexPath.row].memedImageAsUIImage
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
     }
