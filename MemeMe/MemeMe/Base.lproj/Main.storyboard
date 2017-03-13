@@ -97,6 +97,11 @@
                                             <action selector="shareMeme" destination="BYZ-38-t0r" id="mFg-bb-yin"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem systemItem="save" id="zDG-6p-P1z">
+                                        <connections>
+                                            <action selector="saveMeme" destination="BYZ-38-t0r" id="Emu-VW-pUa"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LOA-97-pYW"/>
                                     <barButtonItem title="Cancel" id="SJz-3R-KDc">
                                         <connections>

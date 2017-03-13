@@ -57,7 +57,7 @@ extension MemesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as? MemeDetailViewController {
-            memeDetailVC.meme = memes[indexPath.row]
+            memeDetailVC.viewingMemeIndex = indexPath.row
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
     }

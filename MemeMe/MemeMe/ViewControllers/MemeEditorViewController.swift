@@ -34,7 +34,7 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var topToolBar: UIToolbar!
     @IBOutlet weak var bottomToolBar: UIToolbar!
 
-    var meme: Meme?
+    var editingMemeIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,28 +47,38 @@ class MemeEditorViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureEditor()
-        subscribeToKeyboardNotifications()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        unsubscribeToKeyboardNotifications()
+        cleanBeforeDisappear()
     }
 }
 
-// MARK: TextField default customization
+// MARK: Initialization and deinitialization functions
 private extension MemeEditorViewController {
     func configureEditor() {
         // Enable the select from camera feature only if there is a camera available.
         selectFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
 
-        let isEditingMeme = meme != nil
-        topTextField.text = (isEditingMeme) ? meme?.topText : "TOP"
-        bottomTextField.text = (isEditingMeme) ? meme?.bottomText : "BOTTOM"
-        if isEditingMeme {
-            selectedImage.image = meme?.originalImageAsUIImage
+        // If the meme is being edited
+        if let index = editingMemeIndex,
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let meme = appDelegate.memes[index]
+            topTextField.text = meme.topText
+            bottomTextField.text = meme.bottomText
+            selectedImage.image = meme.originalImageAsUIImage
+        } else {
+            topTextField.text = "TOP"
+            bottomTextField.text = "BOTTOM"
         }
         shareButton.isEnabled = selectedImage.image != nil
+        subscribeToKeyboardNotifications()
+    }
+    // Unsubscribing and reseting the edtingMemeIndex
+    func cleanBeforeDisappear() {
+        editingMemeIndex = nil
+        unsubscribeToKeyboardNotifications()
     }
 }
 
@@ -100,6 +110,13 @@ private extension MemeEditorViewController {
             }
             self.present(activityViewController, animated: true)
         }
+    }
+
+    @IBAction func saveMeme() {
+        if let generatedMeme = generateMemedImage() {
+            self.save(generatedMeme)
+        }
+        self.dismiss(animated: true)
     }
 }
 
@@ -184,17 +201,25 @@ private extension MemeEditorViewController {
     func save(_ generatedMemedImage: UIImage) {
         if let topText = topTextField.text, let bottomText = bottomTextField.text,
             let originalImage = selectedImage.image {
-
             if let originalImageName = saveImageToFile(originalImage),
                 let memedImageName = saveImageToFile(generatedMemedImage) {
+
                 // Creating a new meme to be stored
-                let meme = Meme(topText: topText, bottomText: bottomText,
+                let newMeme = Meme(topText: topText, bottomText: bottomText,
                                 originalImageName: originalImageName, memedImageName: memedImageName)
-                // Persisting data
-                meme.save()
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                    // Appeding the meme in the AppDelegate's memes property
-                    appDelegate.memes.append(meme)
+
+                //If the meme is being edited
+                if let index = editingMemeIndex,
+                    let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                    let memeToUpdate = appDelegate.memes[index]
+                    memeToUpdate.update(using: newMeme)
+                } else {
+                    // Persisting data
+                    newMeme.save()
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                        // Appeding the meme in the AppDelegate's memes property
+                        appDelegate.memes.append(newMeme)
+                    }
                 }
             }
         }

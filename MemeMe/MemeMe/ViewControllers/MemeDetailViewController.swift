@@ -10,8 +10,8 @@ import UIKit
 
 class MemeDetailViewController: UIViewController {
 
-    @IBOutlet private weak var memeDetailImage: UIImageView!
-    var meme: Meme!
+    @IBOutlet weak var memeDetailImage: UIImageView!
+    var viewingMemeIndex: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,12 @@ class MemeDetailViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        if let meme = meme {
-            memeDetailImage.image = meme.memedImageAsUIImage
-        }
+        super.viewWillAppear(animated)
+        loadData()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 }
 
@@ -30,8 +33,16 @@ private extension MemeDetailViewController {
    @objc func editMeme() {
         if let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController")
             as? MemeEditorViewController {
-            memeEditorVC.meme = meme
+            memeEditorVC.editingMemeIndex = viewingMemeIndex
             present(memeEditorVC, animated: true)
+        }
+    }
+
+    func loadData() {
+        if let index = viewingMemeIndex,
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            let meme = appDelegate.memes[index]
+            memeDetailImage.image = meme.memedImageAsUIImage
         }
     }
 }
