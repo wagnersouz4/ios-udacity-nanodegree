@@ -8,6 +8,16 @@
 
 import UIKit
 
+// MARK: Image Customization
+extension UIImageView {
+    func roundBorders(using color: CGColor? = nil) {
+        self.layer.borderColor = color ?? UIColor.white.cgColor
+        self.layer.borderWidth = CGFloat(4)
+        self.layer.cornerRadius = self.frame.size.width / 2
+        self.clipsToBounds = true
+    }
+}
+
 class MemesTableViewController: UITableViewController {
     var memes = [Meme]()
     var chachedImages = [String: UIImage?]()
@@ -48,7 +58,8 @@ extension MemesTableViewController {
             cell.originalImage.image = image
             chachedImages.updateValue(image, forKey: meme.originalImageName)
         }
-
+        //rounding image
+        cell.originalImage.roundBorders()
         return cell
     }
 }

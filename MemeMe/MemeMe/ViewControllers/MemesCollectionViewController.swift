@@ -10,6 +10,14 @@ import UIKit
 
 class MemesCollectionViewController: UICollectionViewController {
     var memes = [Meme]()
+    @IBOutlet weak var layout: UICollectionViewFlowLayout!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = 1
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

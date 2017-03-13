@@ -219,9 +219,4 @@ private extension MemeEditorViewController {
         }
         return nil
     }
-
-    func setToolBarsIsHidden(to isHidden: Bool) {
-        topToolBar.isHidden = isHidden
-        bottomToolBar.isHidden = isHidden
-    }
 }
