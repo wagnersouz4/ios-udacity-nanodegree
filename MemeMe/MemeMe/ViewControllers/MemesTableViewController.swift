@@ -73,3 +73,21 @@ extension MemesTableViewController {
         }
     }
 }
+
+// MARK: @IBActions and segues' prepare
+extension MemesTableViewController {
+    @IBAction func createNewMeme() {
+        self.performSegue(withIdentifier: "SegueTableViewEditor", sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "SegueTableViewEditor" {
+                if let destination = segue.destination as? MemeEditorViewController {
+                    destination.editingMemeIndex = nil
+                }
+            }
+        }
+    }
+
+}

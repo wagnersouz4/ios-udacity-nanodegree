@@ -29,13 +29,17 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var selectFromCameraButton: UIBarButtonItem!
     @IBOutlet weak var selectFromAlbumButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var topToolBar: UIToolbar!
     @IBOutlet weak var bottomToolBar: UIToolbar!
 
     var editingMemeIndex: Int?
-
+    // This property is needed when the user is edting a Meme and wants to change its background.
+    // The reason is that when the Imagepicker dismiss the view will appear again but there the image
+    // should not be updated with the old Meme image, but keep using the selected one.
+    var editingMemeBackgroundHasChanged = false
     override func viewDidLoad() {
         super.viewDidLoad()
         topTextField.loadMemeStyleDefaults()
@@ -51,11 +55,10 @@ class MemeEditorViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        cleanBeforeDisappear()
+        unsubscribeToKeyboardNotifications()
     }
 }
 
-// MARK: Initialization and deinitialization functions
 private extension MemeEditorViewController {
     func configureEditor() {
         // Enable the select from camera feature only if there is a camera available.
@@ -67,19 +70,27 @@ private extension MemeEditorViewController {
             let meme = appDelegate.memes[index]
             topTextField.text = meme.topText
             bottomTextField.text = meme.bottomText
-            selectedImage.image = meme.originalImageAsUIImage
+            if !editingMemeBackgroundHasChanged {
+                self.selectedImage.image = meme.originalImageAsUIImage
+            }
         } else {
             topTextField.text = "TOP"
             bottomTextField.text = "BOTTOM"
         }
-        shareButton.isEnabled = selectedImage.image != nil
+        let memeHasImage = selectedImage.image != nil
+        shareButton.isEnabled = memeHasImage
+        saveButton.isEnabled = memeHasImage
         subscribeToKeyboardNotifications()
     }
-    // Unsubscribing and reseting the edtingMemeIndex
-    func cleanBeforeDisappear() {
-        editingMemeIndex = nil
-        unsubscribeToKeyboardNotifications()
+
+    // Preseting a UIImagePickerController with a specific sourceType
+    func presentUIImagePicker(usingSourceType sourceType: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        present(imagePicker, animated: true)
     }
+
 }
 
 // MARK: IBActions
@@ -123,18 +134,11 @@ private extension MemeEditorViewController {
 // MARK: UIImagePicker and UINavigation's delegate
 extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    // Preseting a UIImagePickerController with a specific sourceType
-    func presentUIImagePicker(usingSourceType sourceType: UIImagePickerControllerSourceType) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
-    }
-
     // Delegate method to set the image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            selectedImage.image = image
+            self.selectedImage.image = image
+            editingMemeBackgroundHasChanged = true
         }
         dismiss(animated: true)
     }

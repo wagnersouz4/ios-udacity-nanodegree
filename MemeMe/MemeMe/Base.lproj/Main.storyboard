@@ -141,6 +141,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="CQO-Bk-cMt" id="7nl-tz-a9O"/>
                         <outlet property="bottomToolBar" destination="1Or-Je-jeB" id="y5j-O5-s4B"/>
+                        <outlet property="saveButton" destination="zDG-6p-P1z" id="77P-qn-wUA"/>
                         <outlet property="selectFromAlbumButton" destination="SRE-8k-wV6" id="fHT-wJ-cml"/>
                         <outlet property="selectFromCameraButton" destination="tWX-fq-5B8" id="Wei-BP-Nfq"/>
                         <outlet property="selectedImage" destination="vBh-9i-mSr" id="H8N-Ro-PfX"/>
@@ -211,12 +212,13 @@
                     <navigationItem key="navigationItem" title="MemeMe" id="qz1-qs-lyl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="3x5-2W-JLm">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="ncy-I8-0zZ"/>
+                                <action selector="createNewMeme" destination="voc-dl-a8v" id="G5v-Zv-k9u"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="layout" destination="7oh-Wz-wa6" id="ANn-HX-6OU"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="SegueCollectionViewEditor" modalTransitionStyle="crossDissolve" id="ih0-0f-A2J"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEM-AU-HCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -319,14 +321,17 @@
                     <navigationItem key="navigationItem" title="MemeMe" id="7qX-Jx-C5g">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="pPg-dW-VTL">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="presentation" id="4by-an-Ell"/>
+                                <action selector="createNewMeme" destination="Kqi-9f-kQG" id="Dxy-S6-bsV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="SegueTableViewEditor" modalTransitionStyle="crossDissolve" id="RdE-NS-Hpr"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sm5-BJ-t9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-780" y="-282.90854572713647"/>
+            <point key="canvasLocation" x="-762" y="-281"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="b2c-Zt-YFP">
@@ -367,6 +372,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4by-an-Ell"/>
+        <segue reference="ih0-0f-A2J"/>
     </inferredMetricsTieBreakers>
 </document>

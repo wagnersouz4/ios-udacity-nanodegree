@@ -62,3 +62,19 @@ extension MemesCollectionViewController {
         }
     }
 }
+
+// MARK: @IBActions and segues' prepare
+extension MemesCollectionViewController {
+    @IBAction func createNewMeme() {
+        performSegue(withIdentifier: "SegueCollectionViewEditor", sender: nil)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            if identifier == "SegueCollectionViewEditor" {
+                if let destination = segue.destination as? MemeEditorViewController {
+                    destination.editingMemeIndex = nil
+                }
+            }
+        }
+    }
+}
