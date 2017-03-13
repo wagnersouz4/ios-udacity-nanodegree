@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: Image Customization
+// MARK: UIImageView extension
 extension UIImageView {
     func roundBorders(using color: CGColor? = nil) {
         self.layer.borderColor = color ?? UIColor.white.cgColor
@@ -28,7 +28,7 @@ class MemesTableViewController: UITableViewController {
     }
 }
 
-extension MemesTableViewController {
+private extension MemesTableViewController {
     func loadMemes() {
         // Loading the memes
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -58,7 +58,6 @@ extension MemesTableViewController {
             cell.originalImage.image = image
             chachedImages.updateValue(image, forKey: meme.originalImageName)
         }
-        //rounding image
         cell.originalImage.roundBorders()
         return cell
     }
@@ -69,7 +68,7 @@ extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
             as? MemeDetailViewController {
-            memeDetailVC.memedImage = memes[indexPath.row].memedImageAsUIImage
+            memeDetailVC.meme = memes[indexPath.row]
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
     }

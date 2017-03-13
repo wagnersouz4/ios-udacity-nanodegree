@@ -11,11 +11,27 @@ import UIKit
 class MemeDetailViewController: UIViewController {
 
     @IBOutlet private weak var memeDetailImage: UIImageView!
-    var memedImage: UIImage!
+    var meme: Meme!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                                 target: self, action: #selector(editMeme))
+    }
 
     override func viewWillAppear(_ animated: Bool) {
-        if let memedImage = memedImage {
-            memeDetailImage.image = memedImage
+        if let meme = meme {
+            memeDetailImage.image = meme.memedImageAsUIImage
+        }
+    }
+}
+
+private extension MemeDetailViewController {
+   @objc func editMeme() {
+        if let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController")
+            as? MemeEditorViewController {
+            memeEditorVC.meme = meme
+            present(memeEditorVC, animated: true)
         }
     }
 }

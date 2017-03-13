@@ -8,6 +8,21 @@
 
 import UIKit
 
+// MARK: Extension to UITextField to load MemeEditor's default style
+private extension UITextField {
+    func loadMemeStyleDefaults() {
+        // Default memeTextAttributes
+        let memeTextAttributes: [String: Any] = [
+            NSStrokeColorAttributeName: UIColor.black,
+            NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: -1
+        ]
+        self.defaultTextAttributes = memeTextAttributes
+        self.textAlignment = .center
+    }
+}
+
 class MemeEditorViewController: UIViewController {
 
     @IBOutlet weak var selectedImage: UIImageView!
@@ -19,19 +34,19 @@ class MemeEditorViewController: UIViewController {
     @IBOutlet weak var topToolBar: UIToolbar!
     @IBOutlet weak var bottomToolBar: UIToolbar!
 
+    var meme: Meme?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        defaultTextFieldConfiguration(for: topTextField)
-        defaultTextFieldConfiguration(for: bottomTextField)
+        topTextField.loadMemeStyleDefaults()
+        topTextField.delegate = self
+        bottomTextField.loadMemeStyleDefaults()
+        bottomTextField.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Enable the select from camera feature only if there is a camera available.
-        selectFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        shareButton.isEnabled = selectedImage.image != nil
+        configureEditor()
         subscribeToKeyboardNotifications()
     }
 
@@ -41,18 +56,19 @@ class MemeEditorViewController: UIViewController {
     }
 }
 
+// MARK: TextField default customization
 private extension MemeEditorViewController {
-    func defaultTextFieldConfiguration(for textField: UITextField) {
-        // Default memeTextAttributes
-        let memeTextAttributes: [String: Any] = [
-            NSStrokeColorAttributeName: UIColor.black,
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-            NSStrokeWidthAttributeName: -1
-        ]
-        textField.defaultTextAttributes = memeTextAttributes
-        textField.delegate = self
-        textField.textAlignment = .center
+    func configureEditor() {
+        // Enable the select from camera feature only if there is a camera available.
+        selectFromCameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+
+        let isEditingMeme = meme != nil
+        topTextField.text = (isEditingMeme) ? meme?.topText : "TOP"
+        bottomTextField.text = (isEditingMeme) ? meme?.bottomText : "BOTTOM"
+        if isEditingMeme {
+            selectedImage.image = meme?.originalImageAsUIImage
+        }
+        shareButton.isEnabled = selectedImage.image != nil
     }
 }
 
