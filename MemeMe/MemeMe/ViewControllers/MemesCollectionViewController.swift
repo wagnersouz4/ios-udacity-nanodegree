@@ -10,13 +10,15 @@ import UIKit
 
 class MemesCollectionViewController: UICollectionViewController {
     var memes = [Meme]()
+
+    // Properties to be used in the flow layout
+    fileprivate let itemsPerRow: CGFloat = 3
+    fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+
     @IBOutlet weak var layout: UICollectionViewFlowLayout!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        layout.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 1
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +62,29 @@ extension MemesCollectionViewController {
             memeDetailVC.viewingMemeIndex = indexPath.row
             self.navigationController?.pushViewController(memeDetailVC, animated: true)
         }
+    }
+}
+
+// MARK: Collection view's flowlayout's delegate
+extension MemesCollectionViewController: UICollectionViewDelegateFlowLayout {
+    // Telling the size of a given cell to the layout
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // Calculating the width of each item
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        return CGSize(width: widthPerItem, height: widthPerItem)
+    }
+    // Space between cells
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    // Space between each line
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
     }
 }
 
