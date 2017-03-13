@@ -232,7 +232,7 @@ private extension MemeEditorViewController {
     func saveImageToFile(_ image: UIImage) -> String? {
         // creating a unique name to the new image
         let newImageName = UUID().uuidString + ".jpg"
-        if let data = UIImageJPEGRepresentation(image, 0.3) {
+        if let data = UIImageJPEGRepresentation(image, 0.8) {
             let filename = FileUtils.documentDirectory.appendingPathComponent(newImageName)
             do {
                 try data.write(to: filename)
