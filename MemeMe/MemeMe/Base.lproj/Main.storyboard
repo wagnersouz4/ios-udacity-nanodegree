@@ -58,6 +58,9 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Or-Je-jeB">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7e5-Hz-TOI"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="pf7-Q9-75d"/>
                                     <barButtonItem systemItem="camera" id="tWX-fq-5B8">
@@ -77,7 +80,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vBh-9i-mSr">
                                 <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="CQO-Bk-cMt">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="CQO-Bk-cMt">
                                 <rect key="frame" x="0.0" y="606" width="375" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -91,6 +94,9 @@
                             </textField>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQg-Y3-G3s">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="JSs-z5-aby"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem systemItem="action" id="YGu-rg-ME5">
                                         <connections>
@@ -113,22 +119,22 @@
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CQO-Bk-cMt" firstAttribute="trailing" secondItem="1Or-Je-jeB" secondAttribute="trailing" id="33o-Hb-9kU"/>
-                            <constraint firstItem="vBh-9i-mSr" firstAttribute="top" secondItem="TQg-Y3-G3s" secondAttribute="bottom" id="CDf-8u-T9O"/>
-                            <constraint firstItem="vBh-9i-mSr" firstAttribute="leading" secondItem="1Or-Je-jeB" secondAttribute="leading" id="KWT-67-Mhe"/>
-                            <constraint firstItem="1Or-Je-jeB" firstAttribute="top" secondItem="vBh-9i-mSr" secondAttribute="bottom" id="LOe-VY-1hm"/>
-                            <constraint firstItem="CQO-Bk-cMt" firstAttribute="leading" secondItem="1Or-Je-jeB" secondAttribute="leading" id="MIY-UY-l7n"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1Or-Je-jeB" secondAttribute="bottom" symbolic="YES" id="TUB-Mp-L7O"/>
-                            <constraint firstItem="vBh-9i-mSr" firstAttribute="trailing" secondItem="1Or-Je-jeB" secondAttribute="trailing" id="U11-ee-4O9"/>
-                            <constraint firstItem="TQg-Y3-G3s" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" symbolic="YES" id="fBq-Xy-T6h"/>
-                            <constraint firstItem="CQO-Bk-cMt" firstAttribute="trailing" secondItem="mbj-G2-mDy" secondAttribute="trailing" id="fQl-gh-jfr"/>
-                            <constraint firstItem="vBh-9i-mSr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hYU-Zh-Kdc"/>
-                            <constraint firstItem="vBh-9i-mSr" firstAttribute="trailing" secondItem="TQg-Y3-G3s" secondAttribute="trailing" id="nsn-oF-aOk"/>
-                            <constraint firstItem="mbj-G2-mDy" firstAttribute="top" secondItem="TQg-Y3-G3s" secondAttribute="bottom" id="qkP-zR-9y2"/>
-                            <constraint firstItem="1Or-Je-jeB" firstAttribute="top" secondItem="CQO-Bk-cMt" secondAttribute="bottom" id="qs7-tL-kEw"/>
-                            <constraint firstAttribute="trailing" secondItem="vBh-9i-mSr" secondAttribute="trailing" id="sT8-Hm-vBd"/>
-                            <constraint firstItem="vBh-9i-mSr" firstAttribute="leading" secondItem="TQg-Y3-G3s" secondAttribute="leading" id="usu-5Y-EJC"/>
-                            <constraint firstItem="CQO-Bk-cMt" firstAttribute="leading" secondItem="mbj-G2-mDy" secondAttribute="leading" id="yjN-NP-QXZ"/>
+                            <constraint firstItem="1Or-Je-jeB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4xi-l3-xJT"/>
+                            <constraint firstItem="TQg-Y3-G3s" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="8fE-xP-9mr"/>
+                            <constraint firstItem="1Or-Je-jeB" firstAttribute="top" secondItem="vBh-9i-mSr" secondAttribute="bottom" id="A8q-JL-rJx"/>
+                            <constraint firstItem="vBh-9i-mSr" firstAttribute="top" secondItem="TQg-Y3-G3s" secondAttribute="bottom" id="EXG-xf-ELs"/>
+                            <constraint firstAttribute="trailing" secondItem="1Or-Je-jeB" secondAttribute="trailing" id="HFA-OW-KvN"/>
+                            <constraint firstItem="mbj-G2-mDy" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HXu-DE-LDY"/>
+                            <constraint firstAttribute="trailing" secondItem="mbj-G2-mDy" secondAttribute="trailing" id="Heu-dC-2qp"/>
+                            <constraint firstItem="TQg-Y3-G3s" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="JfU-Oa-KFm"/>
+                            <constraint firstItem="vBh-9i-mSr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="LMK-aM-427"/>
+                            <constraint firstAttribute="trailing" secondItem="CQO-Bk-cMt" secondAttribute="trailing" id="SpP-0D-t3e"/>
+                            <constraint firstItem="mbj-G2-mDy" firstAttribute="top" secondItem="TQg-Y3-G3s" secondAttribute="bottom" id="Ywx-Er-Fym"/>
+                            <constraint firstItem="CQO-Bk-cMt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Z6D-yB-SNg"/>
+                            <constraint firstAttribute="trailing" secondItem="vBh-9i-mSr" secondAttribute="trailing" id="eCL-bM-fdF"/>
+                            <constraint firstAttribute="trailing" secondItem="TQg-Y3-G3s" secondAttribute="trailing" id="hvX-CY-Jg0"/>
+                            <constraint firstItem="1Or-Je-jeB" firstAttribute="top" secondItem="CQO-Bk-cMt" secondAttribute="bottom" id="mmQ-KP-tUa"/>
+                            <constraint firstAttribute="bottom" secondItem="1Or-Je-jeB" secondAttribute="bottom" id="pdL-UE-cQB"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GEn-0p-WAG"/>
@@ -145,7 +151,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="357" y="546"/>
+            <point key="canvasLocation" x="356" y="545.57721139430294"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MEK-QH-gHR">
