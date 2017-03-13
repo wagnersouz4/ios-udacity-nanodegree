@@ -246,7 +246,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVo-qU-XbS">
                                             <rect key="frame" x="1" y="1" width="373" height="112"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1489383620_right" translatesAutoresizingMaskIntoConstraints="NO" id="0XY-JY-wQg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="0XY-JY-wQg">
                                                     <rect key="frame" x="319" y="33" width="46" height="46"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="46" id="2RL-sx-OUR"/>
@@ -367,8 +367,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1489383620_right" width="512" height="512"/>
         <image name="collection" width="30" height="30"/>
+        <image name="next" width="30" height="30"/>
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
