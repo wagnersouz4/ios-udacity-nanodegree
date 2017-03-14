@@ -2,7 +2,7 @@
 //  PlaySoundsViewController.swift
 //  PitchPerfect
 //
-//  Created by @wagnersouz4 on 28/02/17.
+//  Created by Wagner Souza on 28/02/17.
 //  Copyright © 2017 Wagner Souza. All rights reserved.
 //
 
@@ -53,7 +53,6 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
 
     // MARK: Audio Functions
-    
     func setupAudio() {
         // Initialize (recording) audio file
         do {
@@ -156,7 +155,6 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     // MARK: Connect List of Audio Nodes
-    
     func connectAudioNodes(_ nodes: AVAudioNode...) {
         for index in 0..<nodes.count-1 {
             audioEngine.connect(nodes[index], to: nodes[index+1], format: audioFile.processingFormat)
@@ -164,7 +162,6 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     // MARK: UI Functions
-    
     func configureUI(_ playState: PlayingState) {
         switch(playState) {
         case .playing:

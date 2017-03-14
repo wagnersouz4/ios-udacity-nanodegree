@@ -2,7 +2,7 @@
 //  RecordSoundsViewController.swift
 //  PitchPerfect
 //
-//  Created by @wagnersouz4 on 27/02/17.
+//  Created by Wagner Souza on 27/02/17.
 //  Copyright © 2017 Wagner Souza. All rights reserved.
 //
 
@@ -18,6 +18,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var stopRecordingButton: UIButton!
     
     var audioRecorder: AVAudioRecorder!
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
