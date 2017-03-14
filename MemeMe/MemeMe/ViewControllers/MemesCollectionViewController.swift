@@ -12,13 +12,15 @@ class MemesCollectionViewController: UICollectionViewController {
     var memes = [Meme]()
 
     // Properties to be used in the flow layout
-    fileprivate let itemsPerRow: CGFloat = 3
-    fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    fileprivate let itemsPerRow: CGFloat = 2
+    fileprivate let sectionInsets = UIEdgeInsets(top: 2.0, left: 2.0, bottom: 2.0, right: 2.0)
 
     @IBOutlet weak var layout: UICollectionViewFlowLayout!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        layout.minimumLineSpacing = 2
+        layout.minimumInteritemSpacing = 2
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +74,7 @@ extension MemesCollectionViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Calculating the width of each item
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
+        let availableWidth = view.bounds.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         return CGSize(width: widthPerItem, height: widthPerItem)
     }

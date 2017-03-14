@@ -46,6 +46,7 @@ class MemeEditorViewController: UIViewController {
         topTextField.delegate = self
         bottomTextField.loadMemeStyleDefaults()
         bottomTextField.delegate = self
+        topToolBar.clipsToBounds = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
