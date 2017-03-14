@@ -15,8 +15,7 @@ class MemeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                                 target: self, action: #selector(editMeme))
+        addRightBarButtons()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,12 +29,12 @@ class MemeDetailViewController: UIViewController {
 }
 
 private extension MemeDetailViewController {
-   @objc func editMeme() {
-        if let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController")
-            as? MemeEditorViewController {
-            memeEditorVC.editingMemeIndex = viewingMemeIndex
-            present(memeEditorVC, animated: true)
-        }
+    func addRightBarButtons() {
+        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editMeme))
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share))
+        navigationItem.rightBarButtonItems = [UIBarButtonItem]()
+        navigationItem.rightBarButtonItems?.append(shareButton)
+        navigationItem.rightBarButtonItems?.append(editButton)
     }
 
     func loadData() {
@@ -44,5 +43,28 @@ private extension MemeDetailViewController {
             let meme = appDelegate.memes[index]
             memeDetailImage.image = meme.memedImageAsUIImage
         }
+    }
+}
+
+// MARK: UIBarButtons' actions
+private extension MemeDetailViewController {
+    @objc func editMeme() {
+        if let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController")
+            as? MemeEditorViewController {
+            memeEditorVC.editingMemeIndex = viewingMemeIndex
+            present(memeEditorVC, animated: true)
+        }
+    }
+
+    @objc func share() {
+        let itemsToShare = [memeDetailImage.image]
+        let activityViewController = UIActivityViewController(activityItems: itemsToShare,
+                                                              applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
+            if success {
+                self?.dismiss(animated: true)
+            }
+        }
+        self.present(activityViewController, animated: true)
     }
 }
