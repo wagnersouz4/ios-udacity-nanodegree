@@ -83,6 +83,7 @@
 				3B7FC0DD1E63EBF9009EA085 /* Sources */,
 				3B7FC0DE1E63EBF9009EA085 /* Frameworks */,
 				3B7FC0DF1E63EBF9009EA085 /* Resources */,
+				3BE43DEC1E788A3600EC3069 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -139,6 +140,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3BE43DEC1E788A3600EC3069 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\nswiftlint\nelse\n    echo \"Swiftlint not available\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3B7FC0DD1E63EBF9009EA085 /* Sources */ = {
