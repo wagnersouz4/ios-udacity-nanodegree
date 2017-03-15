@@ -9,9 +9,9 @@
 import UIKit
 
 struct Alert {
-    
+    // Avoiding initialization
     private init() {}
-    
+
     static func show(_ title: String, message: String, actionTitle: String = "Dismiss") {
         if let view = UIApplication.shared.keyWindow?.rootViewController {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

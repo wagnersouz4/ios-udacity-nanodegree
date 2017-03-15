@@ -9,38 +9,21 @@
 import UIKit
 import AVFoundation
 
-class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
+class RecordSoundsViewController: UIViewController {
 
     @IBOutlet weak var recordingLabel: UILabel!
-    
     @IBOutlet weak var recordButton: UIButton!
-    
     @IBOutlet weak var stopRecordingButton: UIButton!
-    
+
     var audioRecorder: AVAudioRecorder!
-    
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         stopRecordingButton.isEnabled = false
     }
-    
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if flag {
-            performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
-        } else {
-            Alert.show("error", message: "There was an audio encoding error")
-        }
-    }
-    
-    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
-        if let avError = error {
-            Alert.show("Error", message: avError.localizedDescription)
-        } else {
-            Alert.show("Error", message: "The audio recording failed!")
-        }
-    }
-    
+}
+
+extension RecordSoundsViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "stopRecording" {
             if let playSoundVC = segue.destination as? PlaySoundsViewController, let url = sender as? URL {
@@ -48,7 +31,29 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             }
         }
     }
-    
+}
+
+// MARK: AVAudioRecorder delegate
+extension RecordSoundsViewController: AVAudioRecorderDelegate {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if flag {
+            performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
+        } else {
+            Alert.show("error", message: "There was an audio encoding error")
+        }
+    }
+
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        if let avError = error {
+            Alert.show("Error", message: avError.localizedDescription)
+        } else {
+            Alert.show("Error", message: "The audio recording failed!")
+        }
+    }
+}
+
+// MARK: IBActions
+private extension RecordSoundsViewController {
     @IBAction func recordAudio(_ sender: UIButton) {
         recordButton.isEnabled = false
         stopRecordingButton.isEnabled = true
@@ -59,7 +64,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let recordingName = "recordedVoice.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = URL(string: pathArray.joined(separator: "/"))
-        
+
         // shared instance means that this resource/hardware (audio circuit) is shared between the apps in the system
         let session = AVAudioSession.sharedInstance()
         do {
@@ -67,13 +72,16 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             // The category opation .defaultToSpeaker is only valid with AVAudioSessionCategoryPlayAndRecord
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: .defaultToSpeaker)
 
-            // URL(string:) is a failable initializer. Is there is an invalid character in the string it will return null
+            // URL(string:) is a failable initializer. 
+            // If there is an invalid character in the string it will return null
             if let stringifiedFilePath = filePath {
                 try audioRecorder = AVAudioRecorder(url: stringifiedFilePath, settings: [:])
                 audioRecorder.delegate = self
-                //Before using metering for an audio player metering should be true. Meters are the displays that shows the audio's signal level and/or the amount of gain reduction being applyied by a compressor/limiter
+                // Before using metering for an audio player metering should be true.
+                // Meters are the displays that shows the audio's signal level and/or the amount of gain reduction 
+                // being applyied by a compressor/limiter
                 audioRecorder.isMeteringEnabled = true
-                
+
                 // creates the file and gets ready to record
                 if audioRecorder.prepareToRecord() {
                     audioRecorder.record()
@@ -99,4 +107,3 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
 }
-
