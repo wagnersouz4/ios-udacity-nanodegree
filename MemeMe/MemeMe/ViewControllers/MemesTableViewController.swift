@@ -51,8 +51,8 @@ extension MemesTableViewController {
         cell.topLabel.text = meme.topText
         cell.loadingIndicator.alpha = 1.0
         cell.loadingIndicator.startAnimating()
-        FileUtils.readAsync(contentsOfFile: meme.originalImagePath, completionHandler: { data in
-            if let data = data as? Data {
+        FileUtils.readAsync(contentsOfFile: meme.originalImageURL, completionHandler: { data in
+            if let data = data {
                 cell.customImageView.image = UIImage(data: data)
                 cell.customImageView.alpha = 0
                 UIView.animate(withDuration: 0.3, animations: {

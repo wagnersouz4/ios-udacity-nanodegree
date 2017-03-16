@@ -41,7 +41,7 @@ private extension MemeDetailViewController {
         if let index = viewingMemeIndex,
             let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             let meme = appDelegate.memes[index]
-            memeDetailImage.image = UIImage(contentsOfFile: meme.memedImagePath)
+            memeDetailImage.image = UIImage(contentsOfFile: meme.memedImageURL.path)
         }
     }
 }

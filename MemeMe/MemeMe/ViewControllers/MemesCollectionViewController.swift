@@ -50,8 +50,8 @@ extension MemesCollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MemeCollectionCell", for: indexPath)
             as? MemeCollectionViewCell else { fatalError("Dequeuing has failed!") }
 
-        FileUtils.readAsync(contentsOfFile: memes[indexPath.row].memedImagePath, completionHandler: { data in
-            if let data = data as? Data {
+        FileUtils.readAsync(contentsOfFile: memes[indexPath.row].memedImageURL, completionHandler: { data in
+            if let data = data {
                 cell.memedImage.image = UIImage(data: data)
             }
         })

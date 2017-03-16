@@ -72,7 +72,7 @@ private extension MemeEditorViewController {
             topTextField.text = meme.topText
             bottomTextField.text = meme.bottomText
             if !editingMemeBackgroundHasChanged {
-                self.selectedImage.image = UIImage(contentsOfFile: meme.originalImagePath)
+                self.selectedImage.image = UIImage(contentsOfFile: meme.originalImageURL.path)
             }
         } else {
             topTextField.text = "TOP"
