@@ -12,6 +12,6 @@ class MemeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var bottomLabel: UILabel!
-    @IBOutlet weak var originalImage: UIImageView!
-
+    @IBOutlet weak var customImageView: UIImageView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
 }

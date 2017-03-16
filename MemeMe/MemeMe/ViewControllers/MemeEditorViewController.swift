@@ -72,7 +72,7 @@ private extension MemeEditorViewController {
             topTextField.text = meme.topText
             bottomTextField.text = meme.bottomText
             if !editingMemeBackgroundHasChanged {
-                self.selectedImage.image = meme.originalImageAsUIImage
+                self.selectedImage.image = UIImage(contentsOfFile: meme.originalImagePath)
             }
         } else {
             topTextField.text = "TOP"
@@ -211,7 +211,7 @@ private extension MemeEditorViewController {
 
                 // Creating a new meme to be stored
                 let newMeme = Meme(topText: topText, bottomText: bottomText,
-                                originalImageName: originalImageName, memedImageName: memedImageName)
+                                   originalImageName: originalImageName, memedImageName: memedImageName)
 
                 //If the meme is being edited
                 if let index = editingMemeIndex,

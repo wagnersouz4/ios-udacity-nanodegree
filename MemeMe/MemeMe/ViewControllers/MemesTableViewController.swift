@@ -8,14 +8,15 @@
 
 import UIKit
 
-// MARK: UIImageView extension
 extension UIImageView {
+
     func roundBorders(using color: CGColor? = nil) {
         self.layer.borderColor = color ?? UIColor.white.cgColor
         self.layer.borderWidth = CGFloat(4)
         self.layer.cornerRadius = self.frame.size.width / 2
         self.clipsToBounds = true
     }
+
 }
 
 class MemesTableViewController: UITableViewController {
@@ -48,12 +49,21 @@ extension MemesTableViewController {
         let meme = memes[indexPath.row]
         cell.bottomLabel.text = meme.bottomText
         cell.topLabel.text = meme.topText
-
-        if let image = meme.originalImageAsUIImage {
-            cell.originalImage.image = image
-        }
-
-        cell.originalImage.roundBorders()
+        cell.loadingIndicator.alpha = 1.0
+        cell.loadingIndicator.startAnimating()
+        FileUtils.readAsync(contentsOfFile: meme.originalImagePath, completionHandler: { data in
+            if let data = data as? Data {
+                cell.customImageView.image = UIImage(data: data)
+                cell.customImageView.alpha = 0
+                UIView.animate(withDuration: 0.3, animations: {
+                    cell.customImageView.alpha = 1
+                    cell.loadingIndicator.alpha = 0
+                }, completion: {_ in
+                    cell.loadingIndicator.stopAnimating()
+                })
+            }
+        })
+        cell.customImageView.roundBorders()
         return cell
     }
 }

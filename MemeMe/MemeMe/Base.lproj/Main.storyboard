@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -314,11 +315,17 @@
                                                 <constraint firstAttribute="width" constant="99" id="Yhr-UE-8B1"/>
                                             </constraints>
                                         </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IOX-2Z-syb">
+                                            <rect key="frame" x="43" y="47" width="20" height="20"/>
+                                            <color key="color" red="0.80097633599999996" green="0.1577677727" blue="0.22789785269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="F8C-gh-Gcq" secondAttribute="bottom" constant="8" id="1Jn-Cy-Jen"/>
                                         <constraint firstItem="gVo-qU-XbS" firstAttribute="top" secondItem="iHH-iw-gvb" secondAttribute="top" constant="1" id="3gF-SL-Pq1"/>
                                         <constraint firstAttribute="bottom" secondItem="gVo-qU-XbS" secondAttribute="bottom" id="87q-jG-3Ww"/>
+                                        <constraint firstItem="IOX-2Z-syb" firstAttribute="top" secondItem="iHH-iw-gvb" secondAttribute="topMargin" constant="39" id="8jj-tq-vfe"/>
+                                        <constraint firstItem="IOX-2Z-syb" firstAttribute="leading" secondItem="iHH-iw-gvb" secondAttribute="leadingMargin" constant="35" id="N42-ov-9wr"/>
                                         <constraint firstItem="gVo-qU-XbS" firstAttribute="leading" secondItem="iHH-iw-gvb" secondAttribute="leading" constant="1" id="PEV-HZ-7as"/>
                                         <constraint firstItem="F8C-gh-Gcq" firstAttribute="top" secondItem="iHH-iw-gvb" secondAttribute="top" constant="8" id="YFk-XX-Wo1"/>
                                         <constraint firstItem="F8C-gh-Gcq" firstAttribute="leading" secondItem="iHH-iw-gvb" secondAttribute="leading" constant="4" id="b0J-TA-pR9"/>
@@ -328,7 +335,8 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="bottomLabel" destination="pqt-hy-Yv8" id="Jvu-CM-hX6"/>
-                                    <outlet property="originalImage" destination="F8C-gh-Gcq" id="jts-Ci-zU9"/>
+                                    <outlet property="customImageView" destination="F8C-gh-Gcq" id="7VZ-1e-7nG"/>
+                                    <outlet property="loadingIndicator" destination="IOX-2Z-syb" id="kCX-DC-H1s"/>
                                     <outlet property="topLabel" destination="Hr2-j8-8Pq" id="zoL-nx-u29"/>
                                 </connections>
                             </tableViewCell>
@@ -393,6 +401,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ih0-0f-A2J"/>
+        <segue reference="RdE-NS-Hpr"/>
     </inferredMetricsTieBreakers>
 </document>
