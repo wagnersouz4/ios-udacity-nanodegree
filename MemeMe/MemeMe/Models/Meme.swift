@@ -20,14 +20,14 @@ class Meme: Object {
     dynamic var memedImageName = ""
 
     // Read-only properties are ignored by default
-    var originalImagePath: String {
+    var originalImageURL: URL {
         return  FileUtils.documentDirectory.appendingPathComponent(
-            originalImageName).path
+            originalImageName)
     }
 
-    var memedImagePath: String {
+    var memedImageURL: URL {
         return FileUtils.documentDirectory.appendingPathComponent(
-            memedImageName).path
+            memedImageName)
     }
 
     // Realm does not require a standard incremented key like int to serve as a primary key.
