@@ -20,8 +20,6 @@ extension UIImageView {
 
 class MemesTableViewController: UITableViewController {
     var memes = [Meme]()
-    var chachedImages = [String: UIImage?]()
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadMemes()
@@ -32,7 +30,7 @@ private extension MemesTableViewController {
     func loadMemes() {
         // Loading the memes
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-           memes = appDelegate.memes
+            memes = appDelegate.memes
         }
         tableView.reloadData()
     }
@@ -50,14 +48,11 @@ extension MemesTableViewController {
         let meme = memes[indexPath.row]
         cell.bottomLabel.text = meme.bottomText
         cell.topLabel.text = meme.topText
-        // trying the cache first
-        if let image = chachedImages[meme.originalImageName] {
+
+        if let image = meme.originalImageAsUIImage {
             cell.originalImage.image = image
-        } else {
-            let image = meme.originalImageAsUIImage
-            cell.originalImage.image = image
-            chachedImages.updateValue(image, forKey: meme.originalImageName)
         }
+
         cell.originalImage.roundBorders()
         return cell
     }
@@ -89,5 +84,4 @@ extension MemesTableViewController {
             }
         }
     }
-
 }

@@ -57,14 +57,16 @@ private extension MemeDetailViewController {
     }
 
     @objc func share() {
-        let itemsToShare = [memeDetailImage.image]
-        let activityViewController = UIActivityViewController(activityItems: itemsToShare,
-                                                              applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
-            if success {
-                self?.dismiss(animated: true)
+        if let image = memeDetailImage.image {
+            let itemsToShare = [image]
+            let activityViewController = UIActivityViewController(activityItems: itemsToShare,
+                                                                  applicationActivities: nil)
+            activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
+                if success {
+                    self?.dismiss(animated: true)
+                }
             }
+            self.present(activityViewController, animated: true)
         }
-        self.present(activityViewController, animated: true)
     }
 }
