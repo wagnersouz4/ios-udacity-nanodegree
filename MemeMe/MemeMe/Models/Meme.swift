@@ -86,7 +86,6 @@ class Meme: Object {
     static func loadAll() -> Results<Meme> {
         do {
             let realm = try Realm()
-            //realm.deleteAll()
             return realm.objects(Meme.self)
         } catch let error as NSError {
             fatalError("Error while retriving Memes: \(error.localizedDescription)")
