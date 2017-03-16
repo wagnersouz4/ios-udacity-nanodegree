@@ -13,7 +13,7 @@ struct FileUtils {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
 
-    static func readAsync(contentsOfFile url: URL, completionHandler handler: @escaping (_:Data?) -> Void) {
+    static func readAsync(contentsOfFile url: URL, completionHandler handler: @escaping (_: Data?) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let data = try? Data(contentsOf: url)
             DispatchQueue.main.async {
