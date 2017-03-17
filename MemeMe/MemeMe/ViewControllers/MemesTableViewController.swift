@@ -25,14 +25,11 @@ class MemesTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         loadMemes()
     }
-}
 
-private extension MemesTableViewController {
     func loadMemes() {
         // Loading the memes
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            memes = appDelegate.memes
-        }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        memes = appDelegate.memes
         tableView.reloadData()
     }
 }
@@ -52,16 +49,15 @@ extension MemesTableViewController {
         cell.loadingIndicator.alpha = 1.0
         cell.loadingIndicator.startAnimating()
         FileUtils.readAsync(contentsOfFile: meme.originalImageURL, completionHandler: { data in
-            if let data = data {
-                cell.customImageView.image = UIImage(data: data)
-                cell.customImageView.alpha = 0
-                UIView.animate(withDuration: 0.3, animations: {
-                    cell.customImageView.alpha = 1
-                    cell.loadingIndicator.alpha = 0
-                }, completion: {_ in
-                    cell.loadingIndicator.stopAnimating()
-                })
-            }
+            guard let data = data else { return }
+            cell.customImageView.image = UIImage(data: data)
+            cell.customImageView.alpha = 0
+            UIView.animate(withDuration: 0.3, animations: {
+                cell.customImageView.alpha = 1
+                cell.loadingIndicator.alpha = 0
+            }, completion: { _ in
+                cell.loadingIndicator.stopAnimating()
+            })
         })
         cell.customImageView.roundBorders()
         return cell
@@ -71,27 +67,26 @@ extension MemesTableViewController {
 // MARK: Table view and delegate
 extension MemesTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
-            as? MemeDetailViewController {
-            memeDetailVC.viewingMemeIndex = indexPath.row
-            self.navigationController?.pushViewController(memeDetailVC, animated: true)
-        }
+        guard let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
+            as? MemeDetailViewController else { return }
+        memeDetailVC.viewingMemeIndex = indexPath.row
+        self.navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 }
 
-// MARK: @IBActions and segues' prepare
+// MARK: @IBActions
 extension MemesTableViewController {
     @IBAction func createNewMeme() {
         self.performSegue(withIdentifier: "SegueTableViewEditor", sender: nil)
     }
+}
 
+// MARK: Segues
+extension MemesTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            if identifier == "SegueTableViewEditor" {
-                if let destination = segue.destination as? MemeEditorViewController {
-                    destination.editingMemeIndex = nil
-                }
-            }
+        guard let identifier = segue.identifier else { return }
+        if identifier == "SegueTableViewEditor", let destination = segue.destination as? MemeEditorViewController {
+            destination.editingMemeIndex = nil
         }
     }
 }

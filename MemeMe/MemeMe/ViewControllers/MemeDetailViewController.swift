@@ -38,8 +38,8 @@ private extension MemeDetailViewController {
     }
 
     func loadData() {
-        if let index = viewingMemeIndex,
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        if let index = viewingMemeIndex {
             let meme = appDelegate.memes[index]
             memeDetailImage.image = UIImage(contentsOfFile: meme.memedImageURL.path)
         }
@@ -49,24 +49,22 @@ private extension MemeDetailViewController {
 // MARK: UIBarButtons' actions
 private extension MemeDetailViewController {
     @objc func editMeme() {
-        if let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController")
-            as? MemeEditorViewController {
-            memeEditorVC.editingMemeIndex = viewingMemeIndex
-            present(memeEditorVC, animated: true)
-        }
+        guard let memeEditorVC = storyboard?.instantiateViewController(withIdentifier: "MemeEditorViewController")
+            as? MemeEditorViewController else { return }
+        memeEditorVC.editingMemeIndex = viewingMemeIndex
+        present(memeEditorVC, animated: true)
     }
 
     @objc func share() {
-        if let image = memeDetailImage.image {
-            let itemsToShare = [image]
-            let activityViewController = UIActivityViewController(activityItems: itemsToShare,
-                                                                  applicationActivities: nil)
-            activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
-                if success {
-                    self?.dismiss(animated: true)
-                }
+        guard let image = memeDetailImage.image else { return }
+        let itemsToShare = [image]
+        let activityViewController = UIActivityViewController(activityItems: itemsToShare,
+                                                              applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = { _, success, _, _ in
+            if success {
+                self.dismiss(animated: true)
             }
-            self.present(activityViewController, animated: true)
         }
+        self.present(activityViewController, animated: true)
     }
 }

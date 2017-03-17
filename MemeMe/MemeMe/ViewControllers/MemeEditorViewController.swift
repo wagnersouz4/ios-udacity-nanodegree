@@ -40,6 +40,7 @@ class MemeEditorViewController: UIViewController {
     // The reason is that when the Imagepicker dismiss the view will appear again but there the image
     // should not be updated with the old Meme image, but keep using the selected one.
     var editingMemeBackgroundHasChanged = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         topTextField.loadMemeStyleDefaults()
@@ -91,7 +92,6 @@ private extension MemeEditorViewController {
         imagePicker.delegate = self
         present(imagePicker, animated: true)
     }
-
 }
 
 // MARK: IBActions
@@ -109,25 +109,24 @@ private extension MemeEditorViewController {
     }
 
     @IBAction func shareMeme() {
-        if let generatedMeme = generateMemedImage() {
-            let itemsToShare = [generatedMeme]
-            let activityViewController = UIActivityViewController(activityItems: itemsToShare,
-                                                                  applicationActivities: nil)
-            // [weak self] is needed to avoid a strong reference cycle
-            activityViewController.completionWithItemsHandler = { [weak self] activity, success, items, error in
-                if success {
-                    self?.save(generatedMeme)
-                    self?.dismiss(animated: true)
-                }
+        guard let generatedMeme = generateMemedImage() else { return }
+        let itemsToShare = [generatedMeme]
+        let activityViewController = UIActivityViewController(activityItems: itemsToShare,
+                                                              applicationActivities: nil)
+
+        activityViewController.completionWithItemsHandler = { _, success, _, _ in
+            if success {
+                self.save(generatedMeme)
+                self.dismiss(animated: true)
             }
-            self.present(activityViewController, animated: true)
         }
+
+        self.present(activityViewController, animated: true)
     }
 
     @IBAction func saveMeme() {
-        if let generatedMeme = generateMemedImage() {
-            self.save(generatedMeme)
-        }
+        guard let generatedMeme = generateMemedImage() else { return }
+        self.save(generatedMeme)
         self.dismiss(animated: true)
     }
 }
@@ -164,10 +163,9 @@ extension MemeEditorViewController: UITextFieldDelegate {
 extension MemeEditorViewController {
     // Moving the view when the keyboards covers the text field
     func keyboardWillShow(_ notification: Notification) {
-        if bottomTextField.isEditing {
-            if let keyboardHeight = getKeyboardHeight(notification) {
-                view.frame.origin.y = 0 - keyboardHeight
-            }
+        guard bottomTextField.isEditing == true else { return }
+        if let keyboardHeight = getKeyboardHeight(notification) {
+            view.frame.origin.y = 0 - keyboardHeight
         }
     }
 
@@ -178,12 +176,8 @@ extension MemeEditorViewController {
 
     // Using the userInfo notification's property to obtain the keyboard height
     func getKeyboardHeight(_ notification: Notification) -> CGFloat? {
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = userInfo[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
-                return keyboardSize.height
-            }
-        }
-        return nil
+        guard let keyboardSize = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? CGRect else { return nil }
+        return keyboardSize.height
     }
 
     // Subscribing to the keyboard's willShow and willHide notification
@@ -198,33 +192,33 @@ extension MemeEditorViewController {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
-
 }
 
 // MARK: Generate and save a Meme
 private extension MemeEditorViewController {
     func save(_ generatedMemedImage: UIImage) {
-        if let topText = topTextField.text, let bottomText = bottomTextField.text,
-            let originalImage = selectedImage.image {
-            if let originalImageName = saveImageToFile(originalImage),
-                let memedImageName = saveImageToFile(generatedMemedImage) {
+        guard let topText = topTextField.text,
+            let bottomText = bottomTextField.text,
+            let originalImage = selectedImage.image else { return }
 
-                // Creating a new meme to be stored
-                let newMeme = Meme(topText: topText, bottomText: bottomText,
-                                   originalImageName: originalImageName, memedImageName: memedImageName)
+        if let originalImageName = saveImageToFile(originalImage),
+            let memedImageName = saveImageToFile(generatedMemedImage) {
 
-                //If the meme is being edited
-                if let index = editingMemeIndex,
-                    let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                    let memeToUpdate = appDelegate.memes[index]
-                    memeToUpdate.update(using: newMeme)
-                } else {
-                    // Persisting data
-                    newMeme.save()
-                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                        // Appeding the meme in the AppDelegate's memes property
-                        appDelegate.memes.append(newMeme)
-                    }
+            // Creating a new meme to be stored
+            let newMeme = Meme(topText: topText, bottomText: bottomText,
+                               originalImageName: originalImageName, memedImageName: memedImageName)
+
+            //If the meme is being edited
+            if let index = editingMemeIndex,
+                let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                let memeToUpdate = appDelegate.memes[index]
+                memeToUpdate.update(using: newMeme)
+            } else {
+                // Persisting data
+                newMeme.save()
+                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                    // Appeding the meme in the AppDelegate's memes property
+                    appDelegate.memes.append(newMeme)
                 }
             }
         }

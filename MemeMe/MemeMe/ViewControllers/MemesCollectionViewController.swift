@@ -27,9 +27,7 @@ class MemesCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         loadMemes()
     }
-}
 
-extension MemesCollectionViewController {
     func loadMemes() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             memes = appDelegate.memes
@@ -51,9 +49,8 @@ extension MemesCollectionViewController {
             as? MemeCollectionViewCell else { fatalError("Dequeuing has failed!") }
 
         FileUtils.readAsync(contentsOfFile: memes[indexPath.row].memedImageURL, completionHandler: { data in
-            if let data = data {
-                cell.memedImage.image = UIImage(data: data)
-            }
+            guard let data = data else { return }
+            cell.memedImage.image = UIImage(data: data)
         })
         return cell
     }
@@ -61,13 +58,11 @@ extension MemesCollectionViewController {
 
 // MARK: Collection view and delegate
 extension MemesCollectionViewController {
-
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
-            as? MemeDetailViewController {
-            memeDetailVC.viewingMemeIndex = indexPath.row
-            self.navigationController?.pushViewController(memeDetailVC, animated: true)
-        }
+        guard let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: "MemeDetailViewController")
+            as? MemeDetailViewController else { return }
+        memeDetailVC.viewingMemeIndex = indexPath.row
+        self.navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 }
 
@@ -100,12 +95,9 @@ extension MemesCollectionViewController {
         performSegue(withIdentifier: "SegueCollectionViewEditor", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            if identifier == "SegueCollectionViewEditor" {
-                if let destination = segue.destination as? MemeEditorViewController {
-                    destination.editingMemeIndex = nil
-                }
-            }
+        guard let identifier = segue.identifier else { return }
+        if identifier == "SegueCollectionViewEditor", let destination = segue.destination as? MemeEditorViewController {
+            destination.editingMemeIndex = nil
         }
     }
 }
