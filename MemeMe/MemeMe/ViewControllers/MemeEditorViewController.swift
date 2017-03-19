@@ -114,7 +114,7 @@ private extension MemeEditorViewController {
         let activityViewController = UIActivityViewController(activityItems: itemsToShare,
                                                               applicationActivities: nil)
 
-        activityViewController.completionWithItemsHandler = { _, success, _, _ in
+        activityViewController.completionWithItemsHandler = { [unowned self] _, success, _, _ in
             if success {
                 self.save(generatedMeme)
                 self.dismiss(animated: true)

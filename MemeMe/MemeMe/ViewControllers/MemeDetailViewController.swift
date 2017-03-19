@@ -60,7 +60,7 @@ private extension MemeDetailViewController {
         let itemsToShare = [image]
         let activityViewController = UIActivityViewController(activityItems: itemsToShare,
                                                               applicationActivities: nil)
-        activityViewController.completionWithItemsHandler = { _, success, _, _ in
+        activityViewController.completionWithItemsHandler = { [unowned self] _, success, _, _ in
             if success {
                 self.dismiss(animated: true)
             }
